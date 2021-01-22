@@ -1,14 +1,20 @@
-import react, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Route, Switch } from "react-router-dom";
 import JobCardItem from "./components/JobCardItem";
 import BaseLayout from "./components/parts/BaseLayout";
-import JobListItem from "./components/JobListItem";
 import SearchPanel from "./components/SearchPanel";
+import { SearchContext } from "./context/SearchValueContext";
+import JobResultList from "./components/JobResultList";
 
 function App() {
-  const [listData, setListData] = useState(null);
 
-  const [resultData, setResultData] = useState(null);
+  const {
+    previousSearch,
+    setListData,
+    listData,
+    resultData,
+    setResultData,
+  } = useContext(SearchContext);
 
   const getJobList = async () => {
     try {
@@ -16,20 +22,13 @@ function App() {
         "https://us-central1-wands-2017.cloudfunctions.net/githubjobs?description=javascript"
       )
         .then((res) => res.json())
-        .then((data) => setListData(data));
+        .then((data) => {
+          setListData(data);
+          console.log(listData);
+        });
     } catch (error) {
       console.log("Error", error.log);
     }
-  };
-
-  const getResult = async (data, search) => {
-    const handledSearchString = search.replace(/ /g, "+");
-
-    const result = data.filter(
-      (item) => item.description.includes(handledSearchString) == 1
-    );
-
-    setResultData(result);
   };
 
   useEffect(() => getJobList(), []);
@@ -37,16 +36,20 @@ function App() {
   return (
     <Switch>
       <Route
-        path="/position/:id"
+        path="/jobs/:id"
         render={(props) => {
-          return <JobCardItem props={props} />;
+          return (
+            <BaseLayout>
+              <JobCardItem props={props} />
+            </BaseLayout>
+          );
         }}
       ></Route>
       <Route path="/">
         <BaseLayout>
-          <SearchPanel getResult={getResult} listData={listData} />
+          <SearchPanel />
           {resultData ? (
-            <JobListItem resultData={resultData} />
+            <JobResultList/>
           ) : (
             "No jobs found yet"
           )}

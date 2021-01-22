@@ -1,14 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { SearchContext } from "../context/SearchValueContext";
 import styled from "styled-components";
 
 const SearchPanelContainer = styled.div`
-display:flex;
-width:50%;
-align-self:center;
+  display: flex;
+  width: 50%;
+  align-self: center;
 `;
 
-export default function SearchPanel({ getResult, listData }) {
+export default function SearchPanel() {
+  const { listData, setResultData, resultData } = useContext(SearchContext);
   const [inputValue, setInputValue] = useState("");
+
+  const getResult = (search) => {
+
+ 
+
+    const handledSearchString = search.replace(/ /g, "+");
+
+    //Search in exisiting state object before fetching again
+    if (resultData) { 
+    
+        const preResult = resultData.filter(
+        (item) => item.description.includes(handledSearchString) == 1);
+        
+        console.log("Already in context", preResult)
+    }
+
+
+    const result = listData.filter(
+      (item) => item.description.includes(handledSearchString) == 1
+    );
+
+    setResultData(result);
+  };
+
   return (
     <SearchPanelContainer>
       <input
@@ -17,7 +43,7 @@ export default function SearchPanel({ getResult, listData }) {
       />
       <button
         onClick={() => {
-          getResult(listData, inputValue);
+          getResult(inputValue);
         }}
       >
         Search for job
