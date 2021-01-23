@@ -21,14 +21,16 @@ export default function SearchPanel({}) {
 
   const [inputValue, setInputValue] = useState("");
   const [search, setSearch] = useState("");
-  const prevStateData = usePrevious(resultData);
-  const prevStateSearchPhrase = usePrevious(search);
-
   const handledSearchString = () => {
     return inputValue.replace(/ /g, "+");
   };
 
   const getJobList = async () => {
+    const prvResult = handlePrvSearch(handledSearchString());
+    if (prvResult.length > 0) {
+      return prvResult;
+    }
+
     try {
       fetch(
         `https://us-central1-wands-2017.cloudfunctions.net/githubjobs?description=${handledSearchString()}`
@@ -36,34 +38,22 @@ export default function SearchPanel({}) {
         .then((res) => res.json())
         .then((data) => {
           setResultData(data);
-          setSearch(handledSearchString());
-
-          const arr = [{ [handledSearchString()]: data }];
-            
+          setPreviousSearch((prevSearch) => [
+            ...prevSearch,
+            { search: handledSearchString(), results: data },
+          ]);
         });
     } catch (error) {
       console.log("Error", error.log);
     }
   };
 
-  const handlePreviousSearch = (search) => {
-    const entries = Object.entries(previousSearch)
-    console.log("JAHA", entries);
-    // if (previousSearch.length > 0) {
-
-
-
-    //   const result = Object.entries(previousSearch).filter(
-    //     (word) => word[0].includes(search) == 1
-    //   );
-
-    //   console.log(result);
-    // }
+  const handlePrvSearch = (value) => {
+    const result = previousSearch.map((item) => {
+      return item.search === value ? item : [];
+    });
+    return result;
   };
-
-  useEffect(() => {
-    console.log("PREVIOUS", previousSearch);
-  }, [previousSearch]);
 
   return (
     <SearchPanelContainer>
@@ -74,7 +64,6 @@ export default function SearchPanel({}) {
       <button
         onClick={() => {
           getJobList();
-          handlePreviousSearch(handledSearchString());
         }}
       >
         Search for job
