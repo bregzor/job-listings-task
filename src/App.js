@@ -16,23 +16,6 @@ function App() {
     setResultData,
   } = useContext(SearchContext);
 
-  const getJobList = async () => {
-    try {
-      fetch(
-        "https://us-central1-wands-2017.cloudfunctions.net/githubjobs?description=javascript"
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          setListData(data);
-          console.log(listData);
-        });
-    } catch (error) {
-      console.log("Error", error.log);
-    }
-  };
-
-  useEffect(() => getJobList(), []);
-
   return (
     <Switch>
       <Route
