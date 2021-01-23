@@ -26,9 +26,20 @@ export default function SearchPanel({}) {
   };
 
   const getJobList = async () => {
+    
+    const handlePrvSearch = (value) => {
+      const result = previousSearch
+        .filter((item) => {
+          return item.search == value ?? item;
+        })
+
+
+      return result;
+    };
+
     const prvResult = handlePrvSearch(handledSearchString());
     if (prvResult.length > 0) {
-      return prvResult;
+      return setResultData(prvResult[0].results);
     }
 
     try {
@@ -46,13 +57,6 @@ export default function SearchPanel({}) {
     } catch (error) {
       console.log("Error", error.log);
     }
-  };
-
-  const handlePrvSearch = (value) => {
-    const result = previousSearch.map((item) => {
-      return item.search === value ? item : [];
-    });
-    return result;
   };
 
   return (
