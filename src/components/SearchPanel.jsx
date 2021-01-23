@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import { SearchContext } from "../context/SearchValueContext";
-import usePrevious from "./usePrevious";
+import Button from '@material-ui/core/Button';
 import styled from "styled-components";
 
 const SearchPanelContainer = styled.div`
@@ -20,21 +20,16 @@ export default function SearchPanel({}) {
   } = useContext(SearchContext);
 
   const [inputValue, setInputValue] = useState("");
-  const [search, setSearch] = useState("");
   const handledSearchString = () => {
     return inputValue.replace(/ /g, "+");
   };
 
   const getJobList = async () => {
-    
+
     const handlePrvSearch = (value) => {
-      const result = previousSearch
-        .filter((item) => {
-          return item.search == value ?? item;
-        })
-
-
-      return result;
+      return previousSearch.filter((item) => {
+        return item.search == value ?? item;
+      });
     };
 
     const prvResult = handlePrvSearch(handledSearchString());
@@ -65,13 +60,11 @@ export default function SearchPanel({}) {
         type="text"
         onChange={(input) => setInputValue(input.target.value)}
       />
-      <button
-        onClick={() => {
+         <Button   onClick={() => {
           getJobList();
-        }}
-      >
-        Search for job
-      </button>
+        }} variant="contained" color="primary">
+        Get job!
+      </Button>
     </SearchPanelContainer>
   );
 }

@@ -1,12 +1,13 @@
 import React, { createContext, useState } from "react";
 
+
 export const SearchContext = createContext({});
 
 export default function SearchContextProvider({ children }) {
 
   const [previousSearch, setPreviousSearch] = useState([]);
-  const [listData, setListData] = useState(null);
-  const [resultData, setResultData] = useState(null);
+  const [listData, setListData] = useState([]);
+  const [resultData, setResultData] = useState([]);
 
   return (
     <SearchContext.Provider
