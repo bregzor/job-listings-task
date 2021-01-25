@@ -8,6 +8,7 @@ export default function SearchContextProvider({ children }) {
   const [previousSearch, setPreviousSearch] = useState([]);
   const [listData, setListData] = useState([]);
   const [resultData, setResultData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   return (
     <SearchContext.Provider
@@ -18,6 +19,8 @@ export default function SearchContextProvider({ children }) {
         setListData,
         resultData,
         setResultData,
+        loading,
+        setLoading
       }}
     >
       {children}

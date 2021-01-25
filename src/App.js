@@ -1,43 +1,23 @@
-import React, { useState, useEffect, useContext } from "react";
+import React from "react";
 import { Route, Switch } from "react-router-dom";
 import JobCardItem from "./components/JobCardItem";
 import BaseLayout from "./components/parts/BaseLayout";
-import SearchPanel from "./components/SearchPanel";
-import { SearchContext } from "./context/SearchValueContext";
-import JobResultList from "./components/JobResultList";
+import StartPage from "./pages/StartPage";
+import JobPage from "./pages/JobPage";
+
 
 function App() {
-
-  const {
-    previousSearch,
-    setListData,
-    listData,
-    resultData,
-    setResultData,
-  } = useContext(SearchContext);
-
   return (
     <Switch>
       <Route
         path="/jobs/:id"
         render={(props) => {
           return (
-            <BaseLayout>
-              <JobCardItem props={props} />
-            </BaseLayout>
-          );
+            <JobPage props={props}/>
+          );  
         }}
       ></Route>
-      <Route path="/">
-        <BaseLayout>
-          <SearchPanel />
-          {resultData ? (
-            <JobResultList/>
-          ) : (
-            "No jobs found yet"
-          )}
-        </BaseLayout>
-      </Route>
+      <Route path="/" component={StartPage} />
     </Switch>
   );
 }
