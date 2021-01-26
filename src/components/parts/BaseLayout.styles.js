@@ -14,11 +14,3 @@ export const JobHeader = styled.h1``;
 export const JobListContainer = styled.div``;
 export const JobListWrapper = styled.div``;
 
-export const LoaderWrapper = styled.div`
-display:flex;
-width:100%;
-position:fixed;
-top:40vh;
-left: 50vw;
-`
-

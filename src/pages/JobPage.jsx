@@ -4,31 +4,17 @@ import { SearchContext } from "../context/SearchValueContext";
 import JobCardItem from "../components/JobCardItem";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import styled from "styled-components";
-
-const LoaderWrapper = styled.div`
-display:flex;
-width:100%;
-
-position:fixed;
-top:20vh;
-margin:auto;
-`
-
-const Loader = () => {
-    return    <LoaderWrapper><CircularProgress delay={200}  color="secondary" /></LoaderWrapper>
-}
+import LoadContentWrapper from "../components//LoadContentWrapper";
+import { JOB_URL } from "./StartPage";
 
 export default function JobPage({ props }) {
-
   const { setLoading, loading } = useContext(SearchContext);
   const [position, setPosition] = useState(null);
 
-  const getSpecificPosition = async () => {
+  useEffect(() => {
     const id = props.match.params.id;
     try {
-      fetch(
-        `https://us-central1-wands-2017.cloudfunctions.net/githubjobs?id=${id}`
-      )
+      fetch(`${JOB_URL}${id}`)
         .then((res) => res.json())
         .then((data) => {
           setPosition(data);
@@ -37,25 +23,14 @@ export default function JobPage({ props }) {
     } catch (error) {
       console.log(error.log);
     }
-  };
-
-  useEffect(() => { 
-    getSpecificPosition();
   }, []);
 
   return (
     <>
-    <BaseLayout>
-      {loading ? (
-        <Loader/>
-      ) : (
-        <div>
-          <JobCardItem
-            data={position}
-            getSpecificPosition={getSpecificPosition}
-          />
-        </div>
-      )}
+      <BaseLayout title={"GitHub Job-listing"}>
+        <LoadContentWrapper loading={loading}>
+          <JobCardItem data={position} />
+        </LoadContentWrapper>
       </BaseLayout>
     </>
   );

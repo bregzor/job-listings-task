@@ -3,8 +3,10 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { SearchContext } from "../context/SearchValueContext";
 import * as s from "./JobResultList.styles";
 
-export default function JobListItem() {
-  const { resultData, setLoading } = useContext(SearchContext);
+export default function JobResultList({resultData}) {
+
+  const { setLoading } = useContext(SearchContext);
+
   return (
     <>
       <s.List>
@@ -19,8 +21,9 @@ export default function JobListItem() {
                 }}
                 to={`/jobs/${job.id}`}
                 onClick={() => setLoading(true)}
+                key={job.id}
               >
-                <s.CardListItem key={job.id}>
+                <s.CardListItem id={"listItem"} >
                   <img src={job.company_logo} width={150} />
                   <strong>{job.type}</strong>
                   <h2>{job.title}</h2>
@@ -31,7 +34,7 @@ export default function JobListItem() {
             );
           })
         ) : (
-          <p>hej</p>
+          <p>No jobs to be found!</p>
         )}
       </s.List>
     </>

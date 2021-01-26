@@ -9,6 +9,7 @@
         "@testing-library/jest-dom": "^5.11.4",
         "@testing-library/react": "^11.1.0",
         "@testing-library/user-event": "^12.1.10",
+        "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1",
         "enzyme": "^3.11.0",
         "firebase": "^8.2.4",
         "material-ui": "^0.20.2",
@@ -42,5 +43,9 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "devDependencies": {
+        "@types/jest": "^26.0.20",
+        "@types/mocha": "^8.2.0"
     }
 }
