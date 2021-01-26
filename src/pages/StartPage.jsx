@@ -63,7 +63,10 @@ export default function StartPage() {
         />
         <LoadContentWrapper loading={loading}>
           {resultData && resultData.length > 0 ? (
+           <>
+           <p>Jobs found: {resultData.length}</p>
             <JobResultList resultData={resultData} />
+            </> 
           ) : (
             <p>No jobs found yet</p>
           )}
