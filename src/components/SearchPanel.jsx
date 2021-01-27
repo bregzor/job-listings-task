@@ -11,6 +11,7 @@ export default function SearchPanel({ setInputValue, inputValue, getJobList }) {
       <s.InputContainer
         type="text"
         onChange={(input) => setInputValue(input.target.value)}
+        placeholder={"Your search word!"}
       />
       <Button
         onClick={() => {

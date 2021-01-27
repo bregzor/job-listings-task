@@ -4,6 +4,7 @@ import SearchPanel from "../components/SearchPanel";
 import JobResultList from "../components/JobResultList";
 import LoadContentWrapper from "../components/LoadContentWrapper";
 import { SearchContext } from "../context/SearchValueContext";
+import * as s from "../components/JobResultList.styles"
 
 const BASE_URL = "https://us-central1-wands-2017.cloudfunctions.net/";
 
@@ -68,7 +69,7 @@ export default function StartPage() {
             <JobResultList resultData={resultData} />
             </> 
           ) : (
-            <p>No jobs found yet</p>
+            <s.SearchError>No jobs found</s.SearchError>
           )}
         </LoadContentWrapper>
       </BaseLayout>

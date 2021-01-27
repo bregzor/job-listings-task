@@ -38,7 +38,7 @@ export default function JobResultList({ resultData }) {
             );
           })
         ) : (
-          <p>No jobs to be found!</p>
+          <s.SearchError>No jobs to be found!</s.SearchError>
         )}
       </s.List>
     </>

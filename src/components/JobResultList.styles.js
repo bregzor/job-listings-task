@@ -22,17 +22,16 @@ export const CardListItem = styled.article`
 
   font-family: "Roboto", sans-serif;
   border-radius: 5px;
+  border: 2px solid transparent;
 
+  transition: border 150ms ease-in;
 
-  box-shadow:0px 0px 2px gray;
+  box-shadow: 0px 0px 2px gray;
   color: #5f5f5f;
 
   &:hover {
-    background-color: #8dbbc1;
-    color:white;
-    a {
-        color:white;
-    }
+    transition: all 250ms ease-in;
+    border: 2px solid #78bad4;
   }
 
   a {
@@ -45,23 +44,20 @@ export const CardListItem = styled.article`
   }
 
   img {
-
-    height:100%
-
+    height: 100%;
   }
 `;
 
 export const ImageWrapper = styled.div`
-display: flex;
- width:90%;
- height:60px;
- margin:20px;
- margin-left:0;
- object-fit:cover;
- padding-bottom:10px;
- border-bottom: 1px solid gray;
-
-`
+  display: flex;
+  width: 90%;
+  height: 60px;
+  margin: 20px;
+  margin-left: 0;
+  object-fit: cover;
+  padding-bottom: 10px;
+  border-bottom: 1px solid gray;
+`;
 
 export const DescriptionContainer = styled.div`
   overflow: hidden;
@@ -70,3 +66,11 @@ export const DescriptionContainer = styled.div`
   -webkit-line-clamp: 6; /* after 3 line show ... */
   -webkit-box-orient: vertical;
 `;
+
+export const SearchError = styled.div`
+    text-align: center;
+    position: relative;
+    top: 20vh;
+    font-weight: bold;
+    text-transform: uppercase;
+`

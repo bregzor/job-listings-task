@@ -11,5 +11,9 @@ export const SearchPanelContainer = styled.div`
 export const InputContainer = styled.input`
   margin-right: 20px;
   height: 30px;
+  outline: none;
+  border: none;
+  padding:5px;
+  border-bottom:2px solid white;
 
 `;

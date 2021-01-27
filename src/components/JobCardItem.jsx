@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const JobDetailWrapper = styled.div`
-    width:50vw;
+    width:55vw;
     font-size: 14px;
     background: white;
     padding: 30px;
