@@ -130,16 +130,13 @@ describe("test JobCardItem(detail) component", () => {
 
 //Search component
 describe("test Search component", () => {
+  it("renders disabled button when length is < 2", () => {
+    const wrapper = shallow(<SearchPanel inputValue={"o"} />);
+    expect(wrapper.find("#btn").prop("disabled")).toBe(true);
+  });
 
-    it("renders disabled button when length is < 2", () => {
-        const wrapper = shallow(<SearchPanel inputValue={"o"}  />);
-        expect(wrapper.find("#btn").prop("disabled")).toBe(true);
-    });
-
-    it("renders disabled button when length is > 2", () => {
-        const wrapper = shallow(<SearchPanel inputValue={"osd"}  />);
-        expect(wrapper.find("#btn").prop("disabled")).toBe(false);
-    });
-
-
-})
+  it("renders enabled button when length is > 2", () => {
+    const wrapper = shallow(<SearchPanel inputValue={"osd"} />);
+    expect(wrapper.find("#btn").prop("disabled")).toBe(false);
+  });
+});

@@ -55,7 +55,7 @@ export default function StartPage() {
 
   return (
     <>
-      <BaseLayout title="Github jobs">
+      <BaseLayout title="Github Job-listing">
         <SearchPanel
           getJobList={getJobList}
           setInputValue={setInputValue}

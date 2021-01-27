@@ -3,8 +3,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { SearchContext } from "../context/SearchValueContext";
 import * as s from "./JobResultList.styles";
 
-export default function JobResultList({resultData}) {
-
+export default function JobResultList({ resultData }) {
   const { setLoading } = useContext(SearchContext);
 
   return (
@@ -23,12 +22,17 @@ export default function JobResultList({resultData}) {
                 onClick={() => setLoading(true)}
                 key={job.id}
               >
-                <s.CardListItem id={"listItem"} >
-                  <img src={job.company_logo} width={150} />
-                  <strong>{job.type}</strong>
+                <s.CardListItem id={"listItem"}>
+                  <s.ImageWrapper>
+                    <img src={job.company_logo} />
+                  </s.ImageWrapper>
+
                   <h2>{job.title}</h2>
-                  <a href={job.company_url}>Url</a>
-                  <div style={{marginBottom:30}} dangerouslySetInnerHTML={{ __html: job.description }} />
+                  <strong>{job.type}</strong>
+                  <a href={job.company_url}>Go to company website!</a>
+                  <s.DescriptionContainer
+                    dangerouslySetInnerHTML={{ __html: job.description }}
+                  />
                 </s.CardListItem>
               </Link>
             );
